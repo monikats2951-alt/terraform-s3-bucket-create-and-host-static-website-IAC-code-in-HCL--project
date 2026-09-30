@@ -27,9 +27,9 @@ pipeline {
                     sh '''
                         BUCKET_NAME=$(terraform output -raw name)
 
-                        echo "Uploading files to S3 bucket: $BUCKET_NAME"
+                        echo "Uploading files to S3 bucket: buck-for-jenkins"
 
-                        aws s3 sync ./ s3://$BUCKET_NAME \
+                        aws s3 sync ./ s3://buck-for-jenkins \
                             --exclude ".git/*" \
                             --exclude ".terraform/*" \
                             --exclude "terraform.lock.hcl" \
