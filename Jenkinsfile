@@ -7,13 +7,13 @@ pipeline {
         stage('Pull Code from GitHub') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/rajeshark/terraform-s3-bucket-create-and-host-static-website-IAC-code-in-HCL--project.git'
+                    url: 'https://https://github.com/monikats2951-alt/terraform-s3-bucket-create-and-host-static-website-IAC-code-in-HCL--project/edit/main/Jenkinsfile'
             }
         }
 
         stage('Terraform Init & Apply') {
             steps {
-                withAWS(credentials: 'aws-cred-rajesh', region: 'ap-south-1') {
+                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                     sh 'terraform init'
                     sh 'terraform validate'
                     sh 'terraform apply -auto-approve'
@@ -23,7 +23,7 @@ pipeline {
 
         stage('Upload Files to S3') {
             steps {
-                withAWS(credentials: 'aws-cred-rajesh', region: 'us-east-1') {
+                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                     sh '''
                         BUCKET_NAME=$(terraform output -raw name)
 
