@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ('pull code from github') {
             steps {
-                git branch: 'master', url: 'https://github.com/rajeshark/terraform-s3-bucket-create-and-host-static-website-IAC-code-in-HCL--project.git'
+                git branch: 'master', url: 'https://github.com/monikats2951-alt/terraform-s3-bucket-create-and-host-static-website-IAC-code-in-HCL--project/edit/main/Jenkinsfile'
             }
         }
    
@@ -20,7 +20,7 @@ pipeline {
         
         stage ('upload files to s3 bucket') {
             steps {
-                withAWS(credentials: 'aws-cred-rajesh', region: 'us-east-1') {
+                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                     sh '''
                         BUCKET_NAME=$(terraform output -raw name | cut -d'.' -f1)
                         aws s3 sync ./ s3://buck-for-jenkins \
